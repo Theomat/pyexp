@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "pyexp"
+version = "0.1.0"
+description = "Automated Experiment Management"
+authors = ["Théo Matricon <theomatricon@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/Theomat/pyexp"
+
+
+[tool.poetry.scripts]
+pyexp = 'pyexp.main:main'
+
+[tool.poetry.dependencies]
+python = ">=3.7.1"
+colorama = ">=0.4.4"
+
+[tool.poetry.dev-dependencies]
+black = "^21.11b1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

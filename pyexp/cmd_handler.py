@@ -92,7 +92,15 @@ def add_artifacts(args: SimpleNamespace) -> None:
                 file=sys.stderr,
             )
             continue
-        a = Artifcat(p, os.path.abspath(p))
+        absp = os.path.abspath(p)
+        found = False
+        for a in exp.artifacts:
+            if a.path == absp:
+                found = True
+                break
+        if found:
+            continue
+        a = Artifcat(p, absp)
         exp.artifacts.append(a)
     mgr.save_experiment(exp)
 

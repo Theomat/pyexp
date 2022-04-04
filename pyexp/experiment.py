@@ -115,12 +115,19 @@ class Experiment:
 
     def save_compressed(self, dst: str) -> None:
         extension = dst[dst.rindex(".") + 1:]
+        format = extension
+        if format == "bz2":
+            format = "bztar"
+        elif format == "gz":
+            format == "gztar"
+        elif format == "xz":
+            format = "xztar"
         with tempfile.TemporaryDirectory() as tmpdir:
             for artifact in self.artifacts:
                 shutil.copyfile(artifact.path, tmpdir + "/" + artifact.name)
             self.write_description_file(tmpdir)
             self.write_cmd_log(tmpdir + "/experiment_commangs.log")
-            file_name = shutil.make_archive(self.name, extension, tmpdir)
+            file_name = shutil.make_archive(self.name, format, tmpdir)
         shutil.move(file_name, dst)
         self.last_saved = time()
         for a in self.artifacts:

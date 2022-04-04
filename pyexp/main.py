@@ -51,7 +51,7 @@ def main() -> None:
 
     parser_sel = subparsers.add_parser("save", help="save a compressed version of the experiment")
     parser_sel.add_argument("-n", "--name", type=str, help="name of the experiment")
-    parser_sel.add_argument("dst", type=str, help="destination file")
+    parser_sel.add_argument("dst", type=str, help="destination file (extensions: zip, tar, tar.bz2, tar.gz, tar.xz)")
     parser_sel.set_defaults(func=cmd_handler.save_experiment)
 
     # parser_sel = subparsers.add_parser("load", help="load a compressed version of the experiment")

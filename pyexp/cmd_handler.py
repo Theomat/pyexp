@@ -188,4 +188,4 @@ def add_command(args: SimpleNamespace) -> None:
     else:
         exp.commands.append(Command(cmd))
 
-    # mgr.save_experiment(exp)
+    mgr.save_experiment(exp)

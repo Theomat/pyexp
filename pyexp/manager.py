@@ -2,7 +2,7 @@ import os
 from typing import List, Optional
 from pyexp.experiment import Experiment
 
-PATH = os.environ['HOME'] + "/.pyexp/"
+PATH = os.environ["HOME"] + "/.pyexp/"
 
 
 def list_experiments() -> List[Experiment]:
@@ -14,6 +14,7 @@ def list_experiments() -> List[Experiment]:
         if entry.is_file(follow_symlinks=False) and entry.name != "_selected":
             EXPERIMENTS.append(Experiment.from_description_file(entry.path))
     return EXPERIMENTS
+
 
 def save_experiment(exp: Experiment) -> None:
     if not os.path.exists(PATH):
@@ -27,6 +28,7 @@ def get_experiment(name: str) -> Optional[Experiment]:
         return Experiment.from_description_file(desc_file)
     return None
 
+
 def delete_experiment(exp: Experiment) -> None:
     desc_file = os.path.join(PATH, exp.name)
     if get_selected() == exp:
@@ -34,11 +36,13 @@ def delete_experiment(exp: Experiment) -> None:
     if os.path.exists(desc_file):
         os.remove(desc_file)
 
+
 def select(exp: Optional[Experiment]) -> None:
     global selected
     selected = exp
     with open(os.path.join(PATH, "_selected"), "w") as fd:
         fd.write("" if selected is None else selected.name)
+
 
 def get_selected() -> Optional[Experiment]:
     file = os.path.join(PATH, "_selected")

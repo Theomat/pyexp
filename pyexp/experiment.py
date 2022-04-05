@@ -9,7 +9,6 @@ from time import time
 from typing import List
 
 
-
 def date_since_str(ltime: float) -> str:
     if ltime < 0:
         return "never"
@@ -27,12 +26,12 @@ def date_since_str(ltime: float) -> str:
         return f"{min} day{'s' if min > 1 else ''} ago"
     return datetime.fromtimestamp(ltime).date()
 
+
 @dataclass
 class Artifcat:
     name: str
     path: str
     last_saved: float = field(default=-1)
-
 
     def description(self) -> str:
         last = date_since_str(self.last_saved)
@@ -69,6 +68,7 @@ class Artifcat:
                     return 3
         return 0
 
+
 @dataclass
 class Command:
     cmdline: str
@@ -82,24 +82,27 @@ class Experiment:
     commands: List[Command] = field(default_factory=lambda: [])
     last_saved: float = field(default=-1)
 
-
     def write_description_file(self, path: str) -> None:
         with open(os.path.join(path, self.name), "wb") as fd:
-            pickle.dump({"name": self.name,
-                        "artifacts": self.artifacts,
-                        "commands": self.commands,
-                        "last_saved": self.last_saved}, fd)
+            pickle.dump(
+                {
+                    "name": self.name,
+                    "artifacts": self.artifacts,
+                    "commands": self.commands,
+                    "last_saved": self.last_saved,
+                },
+                fd,
+            )
 
     def write_cmd_log(self, path: str) -> None:
-        with open(path, "w")  as fd:
+        with open(path, "w") as fd:
             fd.writelines(f"[{cmd.githead}]" + cmd.cmdline for cmd in self.commands)
 
     @staticmethod
-    def from_description_file(path: str) -> 'Experiment':
+    def from_description_file(path: str) -> "Experiment":
         with open(path, "rb") as fd:
             d = pickle.load(fd)
         return Experiment(**d)
-
 
     def short_representation(self) -> str:
         nart = len(self.artifacts)
@@ -109,12 +112,17 @@ class Experiment:
         if len(levels) >= 1:
             levels = [l for l in levels if l > 0]
             level = 3 if len(levels) > 1 else (levels[0] if len(levels) == 1 else 0)
-            color = [Fore.RESET, Fore.LIGHTRED_EX, Fore.LIGHTGREEN_EX, Fore.LIGHTYELLOW_EX][level]
+            color = [
+                Fore.RESET,
+                Fore.LIGHTRED_EX,
+                Fore.LIGHTGREEN_EX,
+                Fore.LIGHTYELLOW_EX,
+            ][level]
         s = f"{self.name} (last saved: {date_since_str(self.last_saved)}, {color}{nart} artifact{'s' if nart > 1 else ''}{Fore.RESET}, {ncmd} command{'s' if ncmd > 1 else ''})"
         return s
 
     def save_compressed(self, dst: str) -> None:
-        extension = dst[dst.rindex(".") + 1:]
+        extension = dst[dst.rindex(".") + 1 :]
         format = extension
         if format == "bz2":
             format = "bztar"

@@ -32,6 +32,7 @@ positional arguments:
     add                 add artifacts to the experiment
     rm                  remove artifacts from the experiment
     artifacts           show artifacts of the selected experiment
+    diff                show diff for artifacts of the selected experiment
     save                save a compressed version of the experiment
     cmd                 add a command to the experiment
 

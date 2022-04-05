@@ -125,6 +125,18 @@ def show_artifacts(args: SimpleNamespace) -> None:
     for art in exp.artifacts:
         print(art.description())
 
+
+def show_diff(args: SimpleNamespace) -> None:
+    name: str = args.name
+    if name is not None:
+        exp = check_experiment_by_name(name, True)
+    else:
+        exp = check_experiment_selected()
+    for art in exp.artifacts:
+        if art.get_level() > 0:
+            print(art.description())
+
+
 # ==========================================================
 # SAVE & LOAD ==============================================
 # ==========================================================

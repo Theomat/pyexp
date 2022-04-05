@@ -47,6 +47,11 @@ def main() -> None:
     parser_new.add_argument("-n", "--name", type=str, help="name of the new experiment")
     parser_new.set_defaults(func=cmd_handler.show_artifacts)
 
+    parser_new = subparsers.add_parser(
+        "diff", help="show diff for artifacts of the selected experiment"
+    )
+    parser_new.add_argument("-n", "--name", type=str, help="name of the new experiment")
+    parser_new.set_defaults(func=cmd_handler.show_diff)
 
 
     parser_sel = subparsers.add_parser("save", help="save a compressed version of the experiment")

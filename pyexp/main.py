@@ -1,5 +1,6 @@
 import argparse
 
+from pyexp import __version__ as version
 import pyexp.cmd_handler as cmd_handler
 
 
@@ -76,6 +77,8 @@ def main() -> None:
         help="the command to add. - represents the last command. default: -",
     )
     parser_sel.set_defaults(func=cmd_handler.add_command)
+
+    parser.add_argument("--version", action="version", version=f"%(prog)s {version}")
 
     args = parser.parse_args()
     if hasattr(args, "func"):

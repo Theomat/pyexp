@@ -24,16 +24,17 @@ We recommend you write a ``command.log`` with the shell history to reproduce the
 ## Usage
 
 ```
-usage: pyexp [-h] [--version] {list,show,new,sel,del,add,rm,artifacts,diff,save,cmd} ...
+usage: pyexp [-h] [--version] {list,show,new,mv,sel,del,add,rm,artifacts,diff,save,cmd} ...
 
 Python experiment manager.
 
 positional arguments:
-  {list,show,new,sel,del,add,rm,artifacts,diff,save,cmd}
+  {list,show,new,mv,sel,del,add,rm,artifacts,diff,save,cmd}
                         sub-command help
     list                list all experiments
     show                show selected experiment
     new                 create a new experiment
+    mv                  rename selected experiment
     sel                 select specified experiment
     del                 delete specified experiment
     add                 add artifacts to the experiment

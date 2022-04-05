@@ -22,6 +22,10 @@ def main() -> None:
     parser_new.add_argument("name", type=str, help="name of the new experiment")
     parser_new.set_defaults(func=cmd_handler.new_experiment)
 
+    parser_new = subparsers.add_parser("mv", help="rename selected experiment")
+    parser_new.add_argument("name", type=str, help="new name of the experiment")
+    parser_new.set_defaults(func=cmd_handler.rename_experiment)
+
     parser_sel = subparsers.add_parser("sel", help="select specified experiment")
     parser_sel.add_argument("name", type=str, help="name of the experiment")
     parser_sel.set_defaults(func=cmd_handler.sel_experiment)

@@ -79,6 +79,16 @@ def new_experiment(args: SimpleNamespace) -> None:
     mgr.select(exp)
 
 
+def rename_experiment(args: SimpleNamespace) -> None:
+    name: str = args.name
+    check_experiment_by_name(name, False)
+    exp = check_experiment_selected()
+    mgr.delete_experiment(exp)
+    exp.name = name
+    mgr.save_experiment(exp)
+    mgr.select(exp)
+
+
 def sel_experiment(args: SimpleNamespace) -> None:
     name: str = args.name
     exp = check_experiment_by_name(name, True)

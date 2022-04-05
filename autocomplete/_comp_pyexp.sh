@@ -3,7 +3,7 @@ _comp_pyexp()
 {
     has_name_opt="show del artifacts diff"
     if [ "${#COMP_WORDS[@]}" == "2" ]; then
-        COMPREPLY=($(compgen -W "list show new sel del add rm artifacts diff save cmd -h --help --version" -- "${COMP_WORDS[1]}"))
+        COMPREPLY=($(compgen -W "list show new sel del add rm artifacts diff save cmd mv -h --help --version" -- "${COMP_WORDS[1]}"))
         return 0
     elif [ "${#COMP_WORDS[@]}" == "3" ]; then
         if [ "${COMP_WORDS[1]}" == "add" ]; then

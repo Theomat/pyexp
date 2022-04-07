@@ -2,11 +2,12 @@
 _comp_pyexp()
 {
     has_name_opt="show del artifacts diff"
+    file_opts="add rm"
     if [ "${#COMP_WORDS[@]}" == "2" ]; then
         COMPREPLY=($(compgen -W "list show new sel del add rm artifacts diff save cmd mv -h --help --version" -- "${COMP_WORDS[1]}"))
         return 0
     elif [ "${#COMP_WORDS[@]}" == "3" ]; then
-        if [ "${COMP_WORDS[1]}" == "add" ]; then
+        if [[ "$file_opts" == *"${COMP_WORDS[1]}"* ]]; then
             COMPREPLY=($(compgen -f -d -- "${COMP_WORDS[2]}"))
             return 0
         elif [ "${COMP_WORDS[1]}" == "sel" ]; then
@@ -32,7 +33,7 @@ _comp_pyexp()
     elif [ "${#COMP_WORDS[@]}" == "5" ] && [ "${COMP_WORDS[1]}" == "save" ] && [[ "-n --name" == *"${COMP_WORDS[2]}"* ]]; then
         COMPREPLY=($(compgen -f -- "${COMP_WORDS[4]}"))
         return 0
-    elif [ "${#COMP_WORDS[@]}" != "1" ] && [ "${COMP_WORDS[1]}" == "add" ]; then
+    elif [ "${#COMP_WORDS[@]}" != "1" ] && [[ "$file_opts" == *"${COMP_WORDS[1]}"* ]]; then
         COMPREPLY=($(compgen -f -d -- "${COMP_WORDS[-1]}"))
         return 0
     fi

@@ -1,0 +1,15 @@
+
+# VS code
+.vscode
+
+# Python files
+__pycache__
+
+# Pytest
+.pytest_cache
+
+# Tensorboard runs
+runs
+
+# documentation build
+docs/build
